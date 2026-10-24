@@ -355,7 +355,7 @@ body.tray-open .footer-bar{padding-bottom:72px}
           <li>Quantities sized for a first run</li>
           <li>Introductions to the next step when you need one</li>
         </ul>
-        <a class="btn btn-quiet" href="#contact" data-role="Brand founder">Tell us what you're making</a>
+        <a class="btn btn-quiet" href="#contact" data-role="Brand">Tell us what you're making</a>
       </article>
     </div>
   </div>
@@ -467,8 +467,9 @@ body.tray-open .footer-bar{padding-bottom:72px}
             <p class="error" id="e-name">Enter your name.</p>
           </div>
           <div class="field">
-            <label class="label" for="f-company">Company <span class="req">(optional)</span></label>
-            <input class="control" id="f-company" name="company" autocomplete="organization">
+            <label class="label" for="f-company">Company</label>
+            <input class="control" id="f-company" name="company" autocomplete="organization" required>
+            <p class="error" id="e-company">Enter your company name.</p>
           </div>
           <div class="field">
             <label class="label" for="f-email">Email</label>
@@ -479,19 +480,21 @@ body.tray-open .footer-bar{padding-bottom:72px}
             <label class="label" for="f-role">I am a</label>
             <select class="control" id="f-role" name="role">
               <option>Contract manufacturer</option>
-              <option>Brand founder</option>
+              <option>Brand</option>
               <option>Distributor</option>
               <option>Other</option>
             </select>
           </div>
           <div class="field full">
             <label class="label" for="f-items">Ingredients</label>
-            <textarea class="control" id="f-items" name="items" placeholder="One per line, e.g. Creatine Monohydrate 200 Mesh"></textarea>
+            <textarea class="control" id="f-items" name="items" placeholder="One per line, e.g. Creatine Monohydrate 200 Mesh" required></textarea>
             <p class="hint">Lines you add from the catalog appear here.</p>
+            <p class="error" id="e-items">Add at least one ingredient, or pick some from the catalog.</p>
           </div>
           <div class="field">
-            <label class="label" for="f-qty">Estimated quantity <span class="req">(optional)</span></label>
-            <input class="control" id="f-qty" name="qty" placeholder="e.g. 25 kg per line, monthly">
+            <label class="label" for="f-qty">Estimated quantity</label>
+            <input class="control" id="f-qty" name="qty" placeholder="e.g. 25 kg per line, monthly" required>
+            <p class="error" id="e-qty">Enter a rough quantity, e.g. 25 kg.</p>
           </div>
           <div class="field">
             <label class="label" for="f-when">Needed by <span class="req">(optional)</span></label>
@@ -708,7 +711,10 @@ $("#quoteForm").addEventListener("submit", e=>{
   const f = e.target;
   const checks = [
     ["name", f.name.value.trim().length>0],
-    ["email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())]
+    ["company", f.company.value.trim().length>0],
+    ["email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())],
+    ["items", f.items.value.trim().length>0],
+    ["qty", f.qty.value.trim().length>0]
   ];
   let first = null;
   checks.forEach(([id,ok])=>{
