@@ -207,6 +207,26 @@ textarea.control{min-height:112px;resize:vertical}
 .callout{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-8);border-radius:var(--radius-md);background:var(--gold-soft);margin-top:var(--space-16)}
 .callout-body{display:flex;flex-direction:column;gap:var(--space-2);flex:1 1 300px;max-width:40rem}
 
+/* photos */
+.photo{display:block;width:100%;height:auto;object-fit:cover;border-radius:var(--radius-md);background:var(--vine-soft)}
+.hero-photo{margin-top:var(--space-16);aspect-ratio:3/1}
+.how-photo{margin-top:var(--space-8);aspect-ratio:5/2}
+.about-photo{margin-top:var(--space-8);aspect-ratio:4/3}
+@media(max-width:600px){.hero-photo,.how-photo{aspect-ratio:3/2}}
+.serve-card{overflow:hidden}
+.serve-img{display:block;width:calc(100% + 2 * var(--space-8));height:auto;max-width:none;margin:calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) var(--space-2);aspect-ratio:2/1;object-fit:cover;background:var(--vine-soft)}
+@media(max-width:800px){.serve-img{width:calc(100% + 2 * var(--space-4));margin:calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-2)}}
+.cat-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4);margin-bottom:var(--space-8)}
+.cat-tile{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:var(--space-2);padding:6px;border:1px solid transparent;border-radius:var(--radius-md);transition:background-color .15s,border-color .15s}
+.cat-tile img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius-sm);background:var(--vine-soft)}
+.cat-tile-label{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-2);padding:0 2px 2px}
+.cat-tile-name{font-weight:600;color:var(--ink)}
+.cat-tile-n{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-muted)}
+.cat-tile:hover{background:var(--surface-raised);border-color:var(--line)}
+.cat-tile[aria-pressed="true"]{background:var(--surface-raised);border-color:var(--vine);box-shadow:var(--shadow-sm)}
+.cat-tile:focus-visible{box-shadow:var(--focus-ring)}
+@media(max-width:700px){.cat-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,64px);align-items:start}
 .about-text{display:flex;flex-direction:column;gap:var(--space-4);font-size:18px;line-height:28px}
@@ -327,6 +347,8 @@ body.tray-open .footer-bar{padding-bottom:72px}
       </aside>
     </div>
 
+    <img class="photo hero-photo" src="assets/photos/hero-botanicals.webp" width="2400" height="800" alt="Dried flowers, leaves and berries laid out on a white surface" fetchpriority="high" decoding="async">
+
     <div class="stats">
       <div class="stat"><span class="stat-value">202</span><span class="stat-label">Ingredients in the 2026 catalog</span></div>
       <div class="stat"><span class="stat-value">178</span><span class="stat-label">Botanical extracts and powders</span></div>
@@ -345,6 +367,7 @@ body.tray-open .footer-bar{padding-bottom:72px}
     </div>
     <div class="serve">
       <article class="serve-card">
+        <img class="serve-img" src="assets/photos/serve-manufacturers.webp" width="1400" height="700" alt="Leafy greens moving through a stainless-steel processing line" loading="lazy" decoding="async">
         <span class="badge badge-vine" style="align-self:flex-start">Contract manufacturers</span>
         <h3 class="h3">You have the spec. We fill it.</h3>
         <p>Send us your ingredient list and target specs. We come back with availability, pricing and the documentation we have on file for each line, so purchasing and QA can move without chasing.</p>
@@ -356,6 +379,7 @@ body.tray-open .footer-bar{padding-bottom:72px}
         <a class="btn btn-quiet" href="#contact" data-role="Contract manufacturer">Request a quote</a>
       </article>
       <article class="serve-card">
+        <img class="serve-img" src="assets/photos/serve-brands.webp" width="1400" height="700" alt="Capsules, softgels and tablets in white bowls on a green background" loading="lazy" decoding="async">
         <span class="badge badge-gold" style="align-self:flex-start">Brand founders</span>
         <h3 class="h3">Your first formula, the same catalog.</h3>
         <p>Building a beverage or supplement brand? You get the same 202 ingredients the manufacturers buy from. Tell us what you're making, and we'll help you pick ingredients and plan the path from sample to first production run.</p>
@@ -377,6 +401,25 @@ body.tray-open .footer-bar{padding-bottom:72px}
       <p class="eyebrow">The catalog</p>
       <h2 class="h2">202 ingredients, searchable.</h2>
       <p class="lead">Search by name or filter by category. Add the lines you need to your quote request, and they'll be filled into the form for you.</p>
+    </div>
+
+    <div class="cat-tiles" role="group" aria-label="Browse by category">
+      <button type="button" class="cat-tile" data-tile="botanica" aria-pressed="false">
+        <img src="assets/photos/cat-botanicals.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+        <span class="cat-tile-label"><span class="cat-tile-name">Botanicals</span><span class="cat-tile-n">178</span></span>
+      </button>
+      <button type="button" class="cat-tile" data-tile="actives" aria-pressed="false">
+        <img src="assets/photos/cat-actives.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+        <span class="cat-tile-label"><span class="cat-tile-name">Functional actives</span><span class="cat-tile-n">12</span></span>
+      </button>
+      <button type="button" class="cat-tile" data-tile="vitamins" aria-pressed="false">
+        <img src="assets/photos/cat-vitamins.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+        <span class="cat-tile-label"><span class="cat-tile-name">Vitamins</span><span class="cat-tile-n">7</span></span>
+      </button>
+      <button type="button" class="cat-tile" data-tile="creatine" aria-pressed="false">
+        <img src="assets/photos/cat-creatine.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+        <span class="cat-tile-label"><span class="cat-tile-name">Creatine</span><span class="cat-tile-n">5</span></span>
+      </button>
     </div>
 
     <div class="tools">
@@ -411,6 +454,8 @@ body.tray-open .footer-bar{padding-bottom:72px}
       <li class="step"><h3>Order and ship</h3><p>We schedule delivery around your production timeline.</p></li>
     </ol>
 
+    <img class="photo how-photo" src="assets/photos/how-warehouse.webp" width="2400" height="960" alt="Warehouse aisle with drums of raw materials on shelves" loading="lazy" decoding="async">
+
     <div class="callout">
       <div class="callout-body">
         <h3 class="h3">Need a spec sheet or CoA?</h3>
@@ -434,6 +479,7 @@ body.tray-open .footer-bar{padding-bottom:72px}
         <p>We're a small team, and that's how we like to work: you talk to the people who handle your order, and your questions get a direct answer.</p>
         <!-- Room for later: founder note, sourcing story, certifications. Only add what you can document. -->
       </div>
+      <img class="photo about-photo" src="assets/photos/about-team-online.webp" width="1400" height="1050" alt="Two people working at a laptop and notebook, seen from above" loading="lazy" decoding="async">
     </div>
     <div class="facts">
       <table>
@@ -629,8 +675,17 @@ chips.addEventListener("click", e=>{
 function setCat(id){
   cat = id;
   chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c.dataset.cat===id ? "true" : "false"));
+  document.querySelectorAll(".cat-tile").forEach(t=>t.setAttribute("aria-pressed", t.dataset.tile===id ? "true" : "false"));
   render();
 }
+
+/* category photo tiles filter the catalog; clicking the active one shows everything again */
+document.querySelectorAll(".cat-tile").forEach(t=>t.addEventListener("click", ()=>{
+  const id = t.dataset.tile;
+  if(cat === id){ setCat("all"); return; }
+  if(id === "botanica") expanded = true;
+  setCat(id);
+}));
 
 /* render */
 function render(){
